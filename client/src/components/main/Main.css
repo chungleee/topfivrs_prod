@@ -1,0 +1,16 @@
+.is-relative {
+  position: relative;
+}
+
+.img {
+  background-color: #999;
+  background-image: url(../img/img2.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.is-margin-auto {
+  margin: 0 auto;
+  width: 75%;
+}

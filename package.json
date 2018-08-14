@@ -6,7 +6,9 @@
   "author": "Leon <leon.karho.chung@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently 'yarn server' 'yarn client'"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
