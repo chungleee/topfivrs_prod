@@ -36,7 +36,7 @@ const validateRegister = ({ username, email, password, password2}) => {
   }
 
   // compare password if match
-  if(!validator.equals(password, password2)) {
+  if(!validator.isEmpty(password2) && !validator.equals(password, password2)) {
     errors.password2 = 'Passwords must match'
   }
 

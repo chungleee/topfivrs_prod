@@ -10,6 +10,7 @@ const User = require('../../models/User')
 
 // validation functions
 const validateRegister = require('../../validation/register')
+const validateLogin = require('../../validation/login')
 
 // @route   GET /api/users/test
 // @desc    Test the api users test route
@@ -72,6 +73,13 @@ router.post('/register', (req, res) => {
 // @desc    Login user + return JWT
 // @access  Public
 router.post('/login', (req, res) => {
+  // validation
+  const { errors, isValid } = validateLogin(req.body)
+  
+  if(!isValid) {
+    return res.status(400).json(errors)
+  }
+
   // destructuring
   const { email, password } = req.body
   // find user by email
