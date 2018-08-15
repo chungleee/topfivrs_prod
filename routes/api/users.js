@@ -8,6 +8,9 @@ const { secret } = require('../../config/keys')
 // Load user model
 const User = require('../../models/User')
 
+// validation functions
+const validateRegister = require('../../validation/register')
+
 // @route   GET /api/users/test
 // @desc    Test the api users test route
 // @access  Public
@@ -19,6 +22,13 @@ router.get('/test', (req, res) => {
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
+  // validation
+  const { errors, isValid } = validateRegister(req.body)
+
+  if(!isValid) {
+    return res.status(400).json(errors)
+  }
+
   // destructure from client form field
   const { username, email, password } = req.body
   // check if user already exists by email
