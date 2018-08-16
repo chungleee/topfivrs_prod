@@ -10,7 +10,8 @@ class Register extends Component {
       username: '',
       email: '',
       password: '',
-      password2: ''
+      password2: '',
+      errors: {}
     }
   }
 
@@ -20,13 +21,23 @@ class Register extends Component {
     })
   }
 
+  handleOnReset = () => {
+    this.setState({
+      username: '',
+      email: '',
+      password: '',
+      password2: '',
+      errors: {}
+    })
+  }
+
   handleOnSubmit = (e) => {
     // prevent refresh
     e.preventDefault()
     // destructure
-    const { username, email, password } = this.state
+    const { username, email, password, password2 } = this.state
     // assign to userData
-    const userData = { username, email, password }
+    const userData = { username, email, password, password2 }
     // axios.post
     axios
       .post('/api/users/register', userData)
@@ -50,11 +61,14 @@ class Register extends Component {
         }
       })
       .catch((error) => {
-        console.log(error);
+        this.setState({
+          errors: error.response.data
+        })
       })
   }
 
   render() {
+    const { errors } = this.state
     return (
       <section className="section">
         <div className="container">
@@ -69,7 +83,8 @@ class Register extends Component {
                   className="input" 
                   onChange={this.handleOnChange}
                 />
-              </div>
+                </div>  
+                { errors ? <p className='help is-danger'>{errors.username}</p> : null}
             </div>
             <div className="field">
               <label className="label">Email</label>
@@ -82,25 +97,32 @@ class Register extends Component {
                   onChange={this.handleOnChange} 
                 />
               </div>
+              { errors ? <p className='help is-danger'>{errors.email}</p> : null}
             </div>
             <div className="field">
               <label className="label">Password</label>
-              <input 
-                name='password'
-                type="password" 
-                placeholder="password" 
-                className="input"
-                onChange={this.handleOnChange} 
-              />
+              <div className="control">
+                <input 
+                  name='password'
+                  type="password" 
+                  placeholder="password" 
+                  className="input"
+                  onChange={this.handleOnChange} 
+                />
+              </div>
+              { errors ? <p className='help is-danger'>{errors.password}</p> : null}
             </div>
             <div className="field">
               <label className="label">Confirm Password</label>
-              <input 
-                name='password2'
-                type="password" 
-                className="input"
-                onChange={this.handleOnChange} 
-              />
+              <div className="control">
+                <input 
+                  name='password2'
+                  type="password" 
+                  className="input"
+                  onChange={this.handleOnChange} 
+                />
+              </div>
+              { errors ? <p className='help is-danger'>{errors.password2}</p> : null}
             </div>
             <div className="field is-grouped">
               <div className="control">
@@ -114,6 +136,7 @@ class Register extends Component {
                 <button
                   type="reset" 
                   className="button"
+                  onClick={this.handleOnReset}
                 >Reset</button>
               </div>
             </div>

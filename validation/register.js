@@ -1,7 +1,7 @@
 const validator = require('validator')
 const isEmpty = require('./isEmpty')
 
-const validateRegister = ({ username, email, password, password2}) => {
+const validateRegister = ({ username, email, password, password2 }) => {
   // init errors obj
   let errors = {}
 
@@ -35,8 +35,7 @@ const validateRegister = ({ username, email, password, password2}) => {
     errors.password2 = 'You must confirm password'
   }
 
-  // compare password if match
-  if(!validator.isEmpty(password2) && !validator.equals(password, password2)) {
+  if(!validator.equals(password2, password)) {
     errors.password2 = 'Passwords must match'
   }
 
