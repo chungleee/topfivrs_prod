@@ -9,6 +9,7 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      errors: {}
     }
   }
 
@@ -42,14 +43,18 @@ class Login extends Component {
         this.props.history.push('/search')
       })
       .catch((error) => {
-        console.log(error);
+        this.setState({
+          errors: error.response.data
+        })
       })
   }
 
   render() {
+    const { errors } = this.state
     return (
       <section className="section">
         <div className="container">
+        {errors.user ? <div className='notification is-danger'>{errors.user}</div> : null}
           <form>
             <div className="field">
               <label className="label">Email</label>
@@ -62,16 +67,20 @@ class Login extends Component {
                       onChange={this.handleOnChange}
                   />
                 </div>
+                {errors ? <p className='help is-danger'>{errors.email}</p> : null}
             </div>
             <div className="field">
               <label className="label">Password</label>
-              <input 
-                type="password" 
-                placeholder="password" 
-                className="input" 
-                name='password'
-                onChange={this.handleOnChange}
-              />
+              <div className="control">
+                <input 
+                  type="password" 
+                  placeholder="password" 
+                  className="input" 
+                  name='password'
+                  onChange={this.handleOnChange}
+                />
+              </div>
+              {errors ? <p className='help is-danger'>{errors.password}</p> : null}
             </div>
             <div className="field">
               <div className="control">

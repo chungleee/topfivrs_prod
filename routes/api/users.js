@@ -88,7 +88,8 @@ router.post('/login', (req, res) => {
     .then((user) => {
       // if not found
       if(!user) {
-        return res.status(404).json({error: 'User not found'})
+        errors.user = 'User not found'
+        return res.status(404).json(errors)
       }
       // destructure user
       const { id, username } = user
