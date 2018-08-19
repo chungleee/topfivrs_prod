@@ -9,7 +9,11 @@
 ## TODOS:
 
   1. Implement a modal that describes the selected business in details
-  2. Perhaps Redux if I decide to scale the app furthermore
+  2. User profile: 
+    - can favourite a business
+  3. Option to filter fetch options
+  4. Perhaps Redux if I decide to scale the app furthermore
+  5. A button to geolocate the user automatically
 
 ### Overall goal of this app
 
