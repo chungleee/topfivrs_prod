@@ -69,7 +69,9 @@ class App extends Component {
           <Route 
             exact 
             path='/' 
-            component={Landing} 
+            render={(props) => {
+              return <Landing {...props} auth={this.state.isAuthenticated} />
+            }}
           />
           <Route 
             path='/register' 

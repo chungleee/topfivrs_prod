@@ -11,9 +11,16 @@ class Landing extends Component {
           <div className="container has-text-centered">
             <h1 className="title is-1 has-text-light">Welcome to <strong>TopFivRs</strong></h1>
             <h2 className="subtitle has-text-light">Find local eats and drinks by entering your current location!</h2>
-            <p className="is-size-5 has-text-light">
-              <Link to='/register'>Register</Link> or <Link to='/login'>Log In</Link> to get started :)
-            </p>
+            
+            {
+              this.props.auth
+              ? <p className="is-size-3 has-text-light">
+                  Start <Link to='/search'>searching</Link>!
+                </p>
+              : <p className="is-size-3 has-text-light">
+                  <Link to='/register'>Register</Link> or <Link to='/login'>Log In</Link> to get started :)
+                </p>
+            }
           </div>
         </div>
       </main>
