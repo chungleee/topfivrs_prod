@@ -7,6 +7,7 @@ const { mongoURI } = require('./config/keys')
 // load routes
 const users = require('./routes/api/users')
 const yelp = require('./routes/api/yelp')
+const favourites = require('./routes/api/favourites')
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(passport.initialize())
 // router
 app.use('/api/users', users)
 app.use('/api/yelp', yelp)
+app.use('/api/favourites', favourites)
 
 // serve static assets if in prod
 if(process.env.NODE_ENV === 'production') {
