@@ -17,7 +17,15 @@ const UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now()
-  }
+  },
+  saved_businesses: [
+    {
+      favourites: {
+        type: Schema.Types.ObjectId,
+        ref: 'favourites'
+      }
+    }
+  ]
 })
 
 module.exports = mongoose.model('users', UserSchema)
