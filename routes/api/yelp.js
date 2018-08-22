@@ -17,6 +17,21 @@ router.get('/test', passport.authenticate('jwt', {session:false}), (req, res) =>
   res.json(req.user)
 })
 
+// @route   GET /api/yelp/business
+// @desc    Fetch business by alias
+// @access  Private
+router.post('/business', passport.authenticate('jwt', {session:false}), (req, res) => {
+  const { alias } = req.body
+  client
+    .business(alias)
+    .then((response) => {
+      res.json(response.jsonBody)
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+})
+
 // @route   GET /api/yelp/restaurant
 // @desc    Fetch restaurants
 // @access  Private
