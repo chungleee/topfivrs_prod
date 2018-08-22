@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
+import './styles.css'
 
 Modal.setAppElement('#root')
 const BusinessModal = ({ isOpen, onRequestClose, onAfterOpen, business }) => {
@@ -9,7 +10,13 @@ const BusinessModal = ({ isOpen, onRequestClose, onAfterOpen, business }) => {
       onRequestClose={onRequestClose}
       onAfterOpen={onAfterOpen}
     >
-      <p>{business.alias}</p>
+      <div className="media">
+        <div className="media-left">
+          <p className="image is-256x256">
+            <img src={business.image_url} alt={business.alias} />
+          </p>
+        </div>
+      </div>
     </Modal>
   )
 }
