@@ -1,6 +1,37 @@
 import React, { Component } from 'react'
+import BusinessModal from '../modal/BusinessModal';
+import axios from 'axios'
 
 class ContentTable extends Component {
+  state = {
+    showModal: false,
+    business_alias: ''
+  }
+
+  handleOpenModal = () => {
+    this.setState({ showModal: true })
+  }
+
+  handleCloseModal = () => {
+    this.setState({ 
+      showModal: false,
+      business_alias: ''
+    })
+  }
+
+  handleGetBusinessId = (e) => {
+    this.setState({
+      business_alias: e.target.getAttribute('biz-alias')
+    })
+    if(this.state.business_id) {
+      this.handleOpenModal()
+    }
+  }
+
+  handleLoadBusiness = () => {
+    
+  }
+
   fetchBiz = () => {
     const { businesses } = this.props
     if(businesses.length){
@@ -8,24 +39,34 @@ class ContentTable extends Component {
         return (
           <tr key={idx}>
             <th>{idx+1}</th>
-            <td>{biz.name}</td>
+            <td
+              onClick={this.handleGetBusinessId}
+              biz-alias={biz.alias}
+            >{biz.name}</td>
             <td>{biz.location.address1}</td>
           </tr>
         )
       })
     }
   }
+
   render() {
     return (
-      <section className="section">
-        <div className="container">
-          <table className="table is-hoverable is-margin-auto">
-            <tbody>
-              {this.fetchBiz()}
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <div>
+        <section className="section">
+          <div className="container">
+            <table className="table is-hoverable is-margin-auto">
+              <tbody>
+                {this.fetchBiz()}
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <BusinessModal 
+          isOpen={this.state.showModal}
+          onRequestClose={this.handleCloseModal}
+        />
+      </div>
     )
   }
 }
