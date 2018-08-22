@@ -5,7 +5,8 @@ import axios from 'axios'
 class ContentTable extends Component {
   state = {
     showModal: false,
-    business_alias: ''
+    business_alias: '',
+    business: {}
   }
 
   // handleOpenModal = () => {
@@ -30,7 +31,9 @@ class ContentTable extends Component {
     const alias = this.state.business_alias
     axios.post('/api/yelp/business', {alias})
       .then((res) => {
-        console.log(res);
+        this.setState({
+          business: res.data
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -71,6 +74,7 @@ class ContentTable extends Component {
           isOpen={this.state.showModal}
           onRequestClose={this.handleCloseModal}
           onAfterOpen={this.handleLoadBusiness}
+          business={this.state.business}
         />
       </div>
     )
