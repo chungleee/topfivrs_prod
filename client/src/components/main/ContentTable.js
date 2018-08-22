@@ -8,9 +8,9 @@ class ContentTable extends Component {
     business_alias: ''
   }
 
-  handleOpenModal = () => {
-    this.setState({ showModal: true })
-  }
+  // handleOpenModal = () => {
+  //   this.setState({ showModal: true })
+  // }
 
   handleCloseModal = () => {
     this.setState({ 
@@ -21,15 +21,20 @@ class ContentTable extends Component {
 
   handleGetBusinessId = (e) => {
     this.setState({
-      business_alias: e.target.getAttribute('biz-alias')
+      business_alias: e.target.getAttribute('biz-alias'),
+      showModal: true
     })
-    if(this.state.business_id) {
-      this.handleOpenModal()
-    }
   }
 
   handleLoadBusiness = () => {
-    
+    const alias = this.state.business_alias
+    axios.post('/api/yelp/business', {alias})
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   fetchBiz = () => {
@@ -65,6 +70,7 @@ class ContentTable extends Component {
         <BusinessModal 
           isOpen={this.state.showModal}
           onRequestClose={this.handleCloseModal}
+          onAfterOpen={this.handleLoadBusiness}
         />
       </div>
     )
