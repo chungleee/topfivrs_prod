@@ -1,35 +1,29 @@
 import React, { Component } from 'react'
-import BusinessModal from '../modal/BusinessModal';
 import axios from 'axios'
+import Modal from '../modal/Modal';
 
 class ContentTable extends Component {
   state = {
     showModal: false,
-    business_alias: '',
     business: {}
   }
-
-  // handleOpenModal = () => {
-  //   this.setState({ showModal: true })
-  // }
 
   handleCloseModal = () => {
     this.setState({ 
       showModal: false,
-      business_alias: ''
+      business: {}
     })
   }
 
-  handleGetBusinessId = (e) => {
+  handleOpenModal = () => {
     this.setState({
-      business_alias: e.target.getAttribute('biz-alias'),
       showModal: true
     })
   }
 
-  handleLoadBusiness = () => {
-    const alias = this.state.business_alias
-    axios.post('/api/yelp/business', {alias})
+  handleLoadBusiness = (e) => {
+    const alias = e.target.getAttribute('biz-alias')
+    axios.post('/api/yelp/business', { alias})
       .then((res) => {
         console.log(res.data);
         this.setState({
@@ -37,8 +31,11 @@ class ContentTable extends Component {
         })
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       })
+    if(this.state.business) {
+      this.handleOpenModal()
+    }
   }
 
   fetchBiz = () => {
@@ -46,10 +43,12 @@ class ContentTable extends Component {
     if(businesses.length){
       return businesses.map((biz, idx) => {
         return (
-          <tr key={idx}>
+          <tr 
+            key={idx}
+            onClick={this.handleLoadBusiness}
+          >
             <th>{idx+1}</th>
             <td
-              onClick={this.handleGetBusinessId}
               biz-alias={biz.alias}
             >{biz.name}</td>
             <td>{biz.location.address1}</td>
@@ -71,10 +70,9 @@ class ContentTable extends Component {
             </table>
           </div>
         </section>
-        <BusinessModal 
-          isOpen={this.state.showModal}
-          onRequestClose={this.handleCloseModal}
-          onAfterOpen={this.handleLoadBusiness}
+        <Modal 
+          showModal={this.state.showModal}
+          handleCloseModal={this.handleCloseModal}
           business={this.state.business}
         />
       </div>
