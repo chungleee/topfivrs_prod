@@ -47,14 +47,23 @@ class SearchBar extends Component {
         {/* SEARCH BAR + BUTTONS */}
         <section className="section">
           <div className="container">
-            <div className="field">
-              <input 
-                onChange={this.handleOnChange}
-                className="input" 
-                type="text" 
-                placeholder="Type in your current address" 
-                name="location" 
-              />
+            <div className="field has-addons">
+              <div className="control is-expanded">
+                <input 
+                  onChange={this.handleOnChange}
+                  className="input" 
+                  type="text" 
+                  placeholder="Type in your current address" 
+                  name="location" 
+                />
+              </div>
+              <div className="control">
+                <a className="button">
+                  <span className="icon is-small">
+                    <i className="fas fa-map-marker-alt"></i>
+                  </span>
+                </a>
+              </div>
             </div>
             <div className="field is-grouped is-grouped-centered">
               <div className="control">
