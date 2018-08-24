@@ -8,7 +8,42 @@ class SearchBar extends Component {
     super()
     this.state = {
       location: '',
-      businesses: []
+      businesses: [],
+      geolocation: true
+    }
+  }
+
+  componentDidMount() {
+    this.geolocationIsValid()
+  }
+  
+  geolocationIsValid = () => {
+    if(navigator.geolocation) {
+      this.setState({ geolocation: false })
+    }
+  }
+
+  handleGeolocation = () => {
+    // success cb
+    const successCb = (position) => {
+      const coords = position.coords
+      const latitude = coords.latitude
+      const longitude = coords.longitude
+      const searchbar = document.getElementById('searchbar')
+
+      searchbar.value = `${latitude}, ${longitude}`
+      this.setState({ location: searchbar.value })
+    }
+
+    // error cb
+    const errorCb = (error) => {
+      console.log(error.message);
+    }
+
+    if(!this.state.geolocation) {
+      navigator
+        .geolocation
+        .getCurrentPosition(successCb, errorCb)
     }
   }
 
@@ -50,6 +85,7 @@ class SearchBar extends Component {
             <div className="field has-addons">
               <div className="control is-expanded">
                 <input 
+                  id='searchbar'
                   onChange={this.handleOnChange}
                   className="input" 
                   type="text" 
@@ -58,7 +94,11 @@ class SearchBar extends Component {
                 />
               </div>
               <div className="control">
-                <a className="button">
+                <a 
+                  onClick={this.handleGeolocation}
+                  className="button"
+                  disabled={this.state.geolocation}
+                >
                   <span className="icon is-small">
                     <i className="fas fa-map-marker-alt"></i>
                   </span>
