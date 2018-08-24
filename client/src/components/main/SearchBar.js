@@ -58,7 +58,7 @@ class SearchBar extends Component {
     if(e.target.name) {
       axios.post(`/api/yelp/${e.target.name}`, {location})
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           const { businesses } = response.data
           this.setState({
             businesses
