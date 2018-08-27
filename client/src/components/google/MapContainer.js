@@ -5,9 +5,7 @@ const apiKey = process.env.REACT_APP_GOOGLEMAPS_API_KEY
 
 class MapContainer extends Component {
   render() {
-    console.log('coords', this.props.coords);
     const Map = withScriptjs(withGoogleMap((props) => {
-      console.log('map component props', props)
       if(props.coords) {
         return (
           <GoogleMap
