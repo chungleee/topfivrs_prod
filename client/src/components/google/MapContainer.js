@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap, withScriptjs, Marker } from 'react-google-maps'
 
-
+const apiKey = process.env.REACT_APP_GOOGLEMAPS_API_KEY
 
 class MapContainer extends Component {
   render() {
