@@ -81,7 +81,7 @@ class SearchBar extends Component {
 
         {/* SEARCH BAR + BUTTONS */}
         <section className="section">
-          <div className="container" style={{width: '800px'}}>
+          <div className="container">
             <div className="field has-addons">
               <div className="control is-expanded">
                 <input 

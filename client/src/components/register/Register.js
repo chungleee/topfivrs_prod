@@ -71,7 +71,7 @@ class Register extends Component {
     const { errors } = this.state
     return (
       <section className="section">
-        <div className="container" style={{width: '600px'}}>
+        <div className="container">
           <form>
             <div className="field">
               <label className="label">Username</label>

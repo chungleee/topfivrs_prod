@@ -53,7 +53,7 @@ class Login extends Component {
     const { errors } = this.state
     return (
       <section className="section">
-        <div className="container" style={{width: '600px'}}>
+        <div className="container">
         {errors.user ? <div className='notification is-danger'>{errors.user}</div> : null}
           <form>
             <div className="field">
