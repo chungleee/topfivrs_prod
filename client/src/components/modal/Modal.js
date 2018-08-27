@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MapContainer from '../google/MapContainer'
 
 class Modal extends Component {
   render() {
@@ -11,7 +12,7 @@ class Modal extends Component {
             <div className="box">
                 <div className="card">
                   <div className="card-image">
-                    <div className="image is-square">
+                    <div className="image is-4by3">
                       <img src={business.image_url} alt={business.alias}/>
                     </div>
                   </div>
@@ -23,7 +24,9 @@ class Modal extends Component {
                       </div>
                     </div>
                     <div className="content">
-                      this is where i'll put google maps API
+                      <MapContainer 
+                        coords={business.coordinates}
+                      />
                     </div>
                   </div>
                 </div>
