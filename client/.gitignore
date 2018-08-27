@@ -4,7 +4,7 @@
 /node_modules
 
 # keys
-/src/config/keys
+/src/config/keys.js
 
 # testing
 /coverage
