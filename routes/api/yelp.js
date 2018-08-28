@@ -7,6 +7,9 @@ const yelp = require('yelp-fusion')
 // user model
 const User = require('../../models/User')
 
+// validation
+const validateLocation = require('../../validation/yelp')
+
 // yelp authentication 
 const client = yelp.client(yelpApiKey)
 
@@ -36,6 +39,12 @@ router.post('/business', passport.authenticate('jwt', {session:false}), (req, re
 // @desc    Fetch restaurants
 // @access  Private
 router.post('/restaurant', passport.authenticate('jwt', {session:false}), (req, res) => {
+  const { errors, isValid } = validateLocation(req.body)
+
+  if(!isValid) {
+    res.status(400).json(errors)
+  }
+  
   // destructure location from body
   const { location } = req.body
   // client search based on location
@@ -59,6 +68,12 @@ router.post('/restaurant', passport.authenticate('jwt', {session:false}), (req, 
 // @desc    Fetch bars
 // @access  Private
 router.post('/bar', passport.authenticate('jwt', {session:false}), (req, res) => {
+  const { errors, isValid } = validateLocation(req.body)
+
+  if(!isValid) {
+    res.status(400).json(errors)
+  }
+  
   // destructure location from body
   const { location } = req.body
   // client search based on location
@@ -82,6 +97,12 @@ router.post('/bar', passport.authenticate('jwt', {session:false}), (req, res) =>
 // @desc    Fetch cafe
 // @access  Private
 router.post('/cafe', passport.authenticate('jwt', {session:false}), (req, res) => {
+  const { errors, isValid } = validateLocation(req.body)
+
+  if(!isValid) {
+    res.status(400).json(errors)
+  }
+  
   // destructure location from body
   const { location } = req.body
   // client search based on location

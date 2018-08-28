@@ -7,6 +7,7 @@ class SearchBar extends Component {
   constructor() {
     super()
     this.state = {
+      errors: {},
       location: '',
       businesses: [],
       geolocation: true
@@ -64,13 +65,16 @@ class SearchBar extends Component {
             businesses
           })
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          this.setState({
+            errors: error.response.data
+          })
         })
     }
   }
 
   render() {
+    const { errors } = this.state
     return (
       <div>
         {/* IMAGE HERO */}
@@ -92,6 +96,7 @@ class SearchBar extends Component {
                   placeholder="Type in your current address" 
                   name="location" 
                 />
+                {errors ? <p className='help is-danger'>{errors.location}</p> : null}
               </div>
               <div className="control">
                 <a 
