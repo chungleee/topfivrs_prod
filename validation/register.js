@@ -15,6 +15,10 @@ const validateRegister = ({ username, email, password, password2 }) => {
   if(!validator.isLength(username, {min: 8, max: 20})) {
     errors.username = 'Username must be between 8 and 20 chars'
   }
+  // set password min: 8 max: 20
+  if(!validator.isLength(password, {min: 8, max: 20})) {
+    errors.password = 'Password must be between 8 and 20 chars'
+  }
 
   // check if valid email
   if(!validator.isEmail(email)) {
