@@ -10,7 +10,8 @@ class SearchBar extends Component {
       errors: {},
       location: '',
       businesses: [],
-      geolocation: true
+      geolocation: true,
+      isLoading: null
     }
   }
 
@@ -55,6 +56,7 @@ class SearchBar extends Component {
   }
 
   handleOnSubmit = (e) => {
+    this.setState({ isLoading: true })
     const { location } = this.state
     if(e.target.name) {
       axios.post(`/api/yelp/${e.target.name}`, {location})
@@ -62,6 +64,7 @@ class SearchBar extends Component {
           // console.log(response);
           const { businesses } = response.data
           this.setState({
+            isLoading: false,
             businesses
           })
         })
@@ -74,7 +77,7 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { errors } = this.state
+    const { errors, isLoading } = this.state
     return (
       <div>
         {/* IMAGE HERO */}
@@ -124,8 +127,14 @@ class SearchBar extends Component {
           </div>
         </section>
 
-        {/* ContentTable Component - todo: pass component state to ContentTable props */}
-        <ContentTable businesses={this.state.businesses}/>
+        {isLoading && 
+          <div className="section">
+            <div className="container is-flex" style={{ justifyContent: 'center', height: '200px', alignItems: 'center' }} >
+              <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+          </div>
+        }
+        {!isLoading && <ContentTable businesses={this.state.businesses} />}
       </div>
     )
   }

@@ -21,12 +21,10 @@ class Modal extends Component {
                       <div className="media-content">
                         <div className="title is-4">{business.name}</div>
                         <div className="subtitle is-6">Ratings: {business.rating}</div>
+                        <MapContainer 
+                          coords={business.coordinates}
+                        />
                       </div>
-                    </div>
-                    <div className="content">
-                      <MapContainer 
-                        coords={business.coordinates}
-                      />
                     </div>
                   </div>
                 </div>

@@ -60,8 +60,8 @@ class ContentTable extends Component {
   render() {
     return (
       <div>
-        <section className="section">
-          <div className="container">
+        <section className="section" >
+          <div className="container" style={{height: '200px'}}>
             <table className="table is-hoverable is-margin-auto">
               <tbody>
                 {this.fetchBiz()}
