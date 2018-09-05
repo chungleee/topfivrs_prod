@@ -69,7 +69,7 @@ class ContentTable extends Component {
             </table>
           </div>
         </section>
-        <Modal 
+        <Modal
           showModal={this.state.showModal}
           handleCloseModal={this.handleCloseModal}
           business={this.state.business}
