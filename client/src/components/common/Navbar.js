@@ -12,14 +12,6 @@ class Navbar extends Component {
     })
   }
 
-  // componentDidMount() {
-  //   window.addEventListener("resize", () => {
-  //     this.setState({
-  //       isMobile: window.innerWidth <= 1024
-  //     })
-  //   })
-  // }
-
   renderForms = () => {
     if(!this.props.auth) {
       return (
@@ -49,7 +41,7 @@ class Navbar extends Component {
             <Link to='/' className="navbar-item">TopFivRs</Link>
 
             <a 
-              onMouseEnter={this.handleHover} 
+              onClick={this.handleHover} 
               role="button" 
               className="navbar-burger"
             >
