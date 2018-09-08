@@ -130,4 +130,26 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
   res.json({id, username, email})
 })
 
+// @route   POST /api/users/favourite
+// @desc    Add to favourites
+// @access  Private
+router.post('/favourite', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const { business_id } = req.body
+
+  // Find current user
+  User
+    .findById(req.user.id)
+    .then(user => {
+      // add business_id to favourites array
+      user.favourites.push(business_id)
+      // save
+      user.save()
+      // res.json result
+      res.json(user)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+})
+
 module.exports = router
