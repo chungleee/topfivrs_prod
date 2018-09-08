@@ -17,7 +17,12 @@ const UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now()
-  }
+  },
+  favourites: [
+    {
+      type: String
+    }
+  ]
 })
 
 module.exports = mongoose.model('users', UserSchema)
