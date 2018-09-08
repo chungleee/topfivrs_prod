@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
 import MapContainer from '../google/MapContainer'
+import axios from 'axios'
 
 class Modal extends Component {
+
+  handleAddToFav = () => {
+    console.log('business_id', this.props.business.id);
+    const business_id = this.props.business.id
+    axios.post('/api/users/favourite', { business_id })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   render() {
     const { showModal, handleCloseModal, business } = this.props
     return showModal
@@ -24,6 +38,10 @@ class Modal extends Component {
                         <MapContainer 
                           coords={business.coordinates}
                         />
+                        <button 
+                          className='button'
+                          onClick={this.handleAddToFav}
+                        >Add to favourites</button>
                       </div>
                     </div>
                   </div>
