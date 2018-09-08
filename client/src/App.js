@@ -63,6 +63,7 @@ class App extends Component {
       <Router>
         <div>
           <Navbar 
+            username={this.state.user.username}
             auth={this.state.isAuthenticated} 
             logoutUser={this.logoutUser}
           />
