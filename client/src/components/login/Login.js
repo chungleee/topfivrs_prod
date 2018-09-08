@@ -81,6 +81,7 @@ class Login extends Component {
                 />
               </div>
               {errors ? <p className='help is-danger'>{errors.password}</p> : null}
+              {errors ? <p className='help is-danger'>{errors.error}</p> : null}
             </div>
             <div className="field">
               <div className="control">
