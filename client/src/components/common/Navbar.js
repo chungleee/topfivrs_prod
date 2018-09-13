@@ -27,6 +27,7 @@ class Navbar extends Component {
         <div onMouseLeave={this.handleHover} className={this.state.isHovered ? "navbar-menu is-active" : "navbar-menu"}>
             <div className="navbar-end">
               <Link to='/search' className='navbar-item'>Search</Link>
+              <Link to='/favourite' className='navbar-item'>Favourites</Link>
               <Link onClick={this.props.logoutUser} to='/' className="navbar-item">Sign Out</Link>
             </div>
           </div>
