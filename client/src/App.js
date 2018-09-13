@@ -6,6 +6,7 @@ import Landing from './components/landing/Landing';
 import Register from './components/register/Register'
 import Login from './components/login/Login'
 import SearchBar from './components/main/SearchBar'
+import Favourites from './components/main/Favourites'
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import { setAuth } from './utils/setAuth';
 import jwt_decode from 'jwt-decode'
@@ -26,6 +27,7 @@ class App extends Component {
       setAuth(localStorage.jwtToken)
       // decode token
       const decoded = jwt_decode(localStorage.jwtToken)
+      console.log(decoded);
       // log in user
       this.logInUser(decoded)
       // check if exp < currentTime
@@ -88,9 +90,16 @@ class App extends Component {
               return <Login {...props} logInUser={this.logInUser} />
             }} 
           />
+
           <PrivateRoute 
             path='/search' 
             component={SearchBar} 
+            auth={this.state.isAuthenticated}
+          />
+
+          <PrivateRoute 
+            path='/favourite'
+            component={Favourites}
             auth={this.state.isAuthenticated}
           />
         </div>
