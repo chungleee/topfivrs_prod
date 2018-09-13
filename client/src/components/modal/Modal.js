@@ -5,9 +5,9 @@ import axios from 'axios'
 class Modal extends Component {
 
   handleAddToFav = () => {
-    console.log('business_id', this.props.business.id);
-    const business_id = this.props.business.id
-    axios.post('/api/users/favourite', { business_id })
+    console.log('business_alias', this.props.business.alias);
+    const business_alias = this.props.business.alias
+    axios.post('/api/users/favourite', { business_alias })
       .then((response) => {
         console.log(response);
       })
