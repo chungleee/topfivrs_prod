@@ -92,14 +92,14 @@ router.post('/login', (req, res) => {
         return res.status(404).json(errors)
       }
       // destructure user
-      const { id, username } = user
+      const { id, username, favourites } = user
       // compare password
       bcrypt
         .compare(password, user.password)
         .then((isMatch) => {
           if(isMatch) {
             // assign jwt payload
-            const payload = { id, username }
+            const payload = { id, username, favourites }
             // sign token
             jwt
               .sign(payload, secret, {expiresIn:3600}, (err, token) => {
@@ -134,14 +134,14 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
 // @desc    Add to favourites
 // @access  Private
 router.post('/favourite', passport.authenticate('jwt', { session: false }), (req, res) => {
-  const { business_id } = req.body
+  const { business_alias } = req.body
 
   // Find current user
   User
     .findById(req.user.id)
     .then(user => {
-      // add business_id to favourites array
-      user.favourites.push(business_id)
+      // add business_alias to favourites array
+      user.favourites.push(business_alias)
       // save
       user.save()
       // res.json result
@@ -149,6 +149,17 @@ router.post('/favourite', passport.authenticate('jwt', { session: false }), (req
     })
     .catch(err => {
       console.log(err);
+    })
+})
+
+// @route   GET /api/users/favourite
+// @desc    Retrieve all user favourites
+// @access  Private
+router.get('/favourite', passport.authenticate('jwt', {session:false}), (req, res) => {
+  User.findById(req.user.id)
+    .then((user) => {
+      const { favourites } = user
+      res.json({ favourites })
     })
 })
 
