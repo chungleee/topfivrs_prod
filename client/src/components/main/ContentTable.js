@@ -23,7 +23,7 @@ class ContentTable extends Component {
 
   handleLoadBusiness = (e) => {
     const alias = e.target.getAttribute('biz-alias')
-    axios.post('/api/yelp/business', { alias})
+    axios.post('/api/yelp/business', { alias })
       .then((res) => {
         this.setState({
           business: res.data
