@@ -142,15 +142,15 @@ router.post('/favourite', passport.authenticate('jwt', { session: false }), (req
     .then(user => {
       // if user has more than 5 favourites - return error
       if(user.favourites.length >= 5) {
-        res.status(400).json({ error: "You can't have more than 5 favourites"})
+        return res.status(400).json({ error: "You can't have more than 5 favourites"})
+      } else {
+        // add business_alias to favourites array
+        user.favourites.push(business_alias)
+        // save
+        user.save()
+        // res.json result
+        res.json(user)
       }
-
-      // add business_alias to favourites array
-      user.favourites.push(business_alias)
-      // save
-      user.save()
-      // res.json result
-      res.json(user)
     })
     .catch(err => {
       console.log(err);
