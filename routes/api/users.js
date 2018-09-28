@@ -140,6 +140,11 @@ router.post('/favourite', passport.authenticate('jwt', { session: false }), (req
   User
     .findById(req.user.id)
     .then(user => {
+      // if user has more than 5 favourites - return error
+      if(user.favourites.length >= 5) {
+        res.status(400).json({ error: "You can't have more than 5 favourites"})
+      }
+
       // add business_alias to favourites array
       user.favourites.push(business_alias)
       // save
