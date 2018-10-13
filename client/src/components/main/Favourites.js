@@ -48,18 +48,28 @@ class Favourites extends Component {
 
   render() {
     const { isLoading, business_alias } = this.state
-    return (
-      <div>
-      {isLoading && 
+    if(business_alias.length <= 0) {
+      return (
         <div className="section">
-          <div className="container is-flex" style={{ justifyContent: 'center', height: '200px', alignItems: 'center' }} >
-            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          <div className="content" style={{ textAlign: 'center'}}>
+            <h3>You don't have anything favourited yet!</h3>
           </div>
         </div>
-      }
-      {!isLoading && <ContentTable businesses={business_alias} />}
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+        {isLoading && 
+          <div className="section">
+            <div className="container is-flex" style={{ justifyContent: 'center', height: '200px', alignItems: 'center' }} >
+              <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+          </div>
+        }
+        {!isLoading && <ContentTable businesses={business_alias} />}
+        </div>
+      )
+    }
   }
 }
 
