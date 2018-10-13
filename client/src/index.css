@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+form {
+  margin: auto;
+  max-width: 500px;
+}
+
+.field.has-addons {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
