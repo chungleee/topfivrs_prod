@@ -15,10 +15,10 @@ class Landing extends Component {
             {
               this.props.auth
               ? <p className="is-size-3 has-text-light">
-                  Start <Link to='/search'>searching</Link>!
+                  Start <Link className='link' to='/search'>searching</Link>!
                 </p>
-              : <p className="is-size-3 has-text-light">
-                  <Link to='/register'>Register</Link> or <Link to='/login'>Log In</Link> to get started :)
+              : <p className="is-size-3 has-text-light link">
+                  <Link className='link' to='/register'><strong>Register</strong></Link> or <Link className='link' to='/login'><strong>Log In</strong></Link> to get started :)
                 </p>
             }
           </div>
