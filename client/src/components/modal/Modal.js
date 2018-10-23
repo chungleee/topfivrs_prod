@@ -3,16 +3,26 @@ import MapContainer from '../google/MapContainer'
 import axios from 'axios'
 
 class Modal extends Component {
+  state = {
+    error: ''
+  }
 
   handleAddToFav = () => {
-    console.log('business_alias', this.props.business.alias);
     const business_alias = this.props.business.alias
     axios.post('/api/users/favourite', { business_alias })
       .then((response) => {
-        console.log(response);
+        null
       })
       .catch((error) => {
-        console.log(error);
+        if(error.response.status === 401) {
+          this.setState({
+            error: 'You need an account to add to favourites.'
+          })
+        } else if(error.response.status === 400) {
+          this.setState({
+            error: "You can't have more than 5 favourites."
+          })
+        }
       })
   }
 
@@ -42,6 +52,7 @@ class Modal extends Component {
                           className='button'
                           onClick={this.handleAddToFav}
                         >Add to favourites</button>
+                        {this.state.error ? <p className='help is-danger'>{this.state.error}</p> : null}
                       </div>
                     </div>
                   </div>
