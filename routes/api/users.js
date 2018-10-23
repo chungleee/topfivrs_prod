@@ -12,13 +12,6 @@ const User = require('../../models/User')
 const validateRegister = require('../../validation/register')
 const validateLogin = require('../../validation/login')
 
-// @route   GET /api/users/test
-// @desc    Test the api users test route
-// @access  Public
-router.get('/test', (req, res) => {
-  res.json({msg: 'success'})
-})
-
 // @route   POST /api/users/register
 // @desc    Register user
 // @access  Public
@@ -125,10 +118,10 @@ router.post('/login', (req, res) => {
 // @route   GET /api/users/current
 // @desc    Check current user
 // @access  Private
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-  const { id, username, email } = req.user
-  res.json({id, username, email})
-})
+// router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
+//   const { id, username, email } = req.user
+//   res.json({id, username, email})
+// })
 
 // @route   POST /api/users/favourite
 // @desc    Add to favourites

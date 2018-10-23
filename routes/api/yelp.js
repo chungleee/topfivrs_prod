@@ -13,17 +13,11 @@ const validateLocation = require('../../validation/yelp')
 // yelp authentication 
 const client = yelp.client(yelpApiKey)
 
-// @route   GET /api/yelp/test
-// @desc    Test yelp private route
-// @access  Private
-router.get('/test', passport.authenticate('jwt', {session:false}), (req, res) => {
-  res.json(req.user)
-})
-
 // @route   GET /api/yelp/business
 // @desc    Fetch business by alias
 // @access  Private
-router.post('/business', passport.authenticate('jwt', {session:false}), (req, res) => {
+// , passport.authenticate('jwt', {session:false})
+router.post('/business', (req, res) => {
   const { alias } = req.body
   client
     .business(alias)
@@ -38,7 +32,8 @@ router.post('/business', passport.authenticate('jwt', {session:false}), (req, re
 // @route   GET /api/yelp/restaurant
 // @desc    Fetch restaurants
 // @access  Private
-router.post('/restaurant', passport.authenticate('jwt', {session:false}), (req, res) => {
+// , passport.authenticate('jwt', {session:false})
+router.post('/restaurant', (req, res) => {
   const { errors, isValid } = validateLocation(req.body)
 
   if(!isValid) {
@@ -67,7 +62,8 @@ router.post('/restaurant', passport.authenticate('jwt', {session:false}), (req, 
 // @route   GET /api/yelp/bar
 // @desc    Fetch bars
 // @access  Private
-router.post('/bar', passport.authenticate('jwt', {session:false}), (req, res) => {
+// , passport.authenticate('jwt', {session:false})
+router.post('/bar', (req, res) => {
   const { errors, isValid } = validateLocation(req.body)
 
   if(!isValid) {
@@ -96,7 +92,8 @@ router.post('/bar', passport.authenticate('jwt', {session:false}), (req, res) =>
 // @route   GET /api/yelp/cafe
 // @desc    Fetch cafe
 // @access  Private
-router.post('/cafe', passport.authenticate('jwt', {session:false}), (req, res) => {
+// , passport.authenticate('jwt', {session:false})
+router.post('/cafe', (req, res) => {
   const { errors, isValid } = validateLocation(req.body)
 
   if(!isValid) {

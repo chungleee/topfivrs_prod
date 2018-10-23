@@ -91,11 +91,13 @@ class App extends Component {
             }} 
           />
 
-          <PrivateRoute 
+          <Route path='/search' component={SearchBar} />
+
+          {/*<PrivateRoute 
             path='/search' 
             component={SearchBar} 
             auth={this.state.isAuthenticated}
-          />
+          />*/}
 
           <PrivateRoute 
             path='/favourite'
